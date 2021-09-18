@@ -1,4 +1,4 @@
-from lib import *
+from .lib import *
 
 def backend_test(func, **kwargs):
     X, y, X_test = func(backend='numpy', **kwargs).get_data()

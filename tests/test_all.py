@@ -1,4 +1,4 @@
-from backend_common import backend_test
+from .backend_common import backend_test
 import regdata as rd
 
 def test_step():

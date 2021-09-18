@@ -1,6 +1,6 @@
-pytest
-pytest-cov
-coveralls
 torch
 tensorflow
 numpy
+pytest
+pytest-cov
+coveralls
