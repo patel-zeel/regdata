@@ -5,8 +5,11 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 class Base:
     def __init__(self, X, y, return_test, scale_X, scale_y, 
                 mean_normalize_y, noisy, test_train_ratio, s_to_n_ratio,
-                noise_variance, scaler='std', link=None, name=None):
-        
+                noise_variance, scaler='std', backend=None, link=None, name=None):
+
+        if backend:        
+            self.set_backend(backend)
+
         self.return_test = return_test
         self.X_test = None
 
@@ -71,6 +74,9 @@ class Base:
         else:
             raise NotImplementedError("This error should be handled when called set_backend")
     
+    def set_backend(self, backend):
+        os.environ['BACKEND'] = backend
+
     def get_backend(self):
         return os.environ['BACKEND']
     
