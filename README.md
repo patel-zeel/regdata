@@ -7,26 +7,30 @@ Collection of regression datasets.
 ## Quick example
 
 ```python
-from regdata import load_olympic, set_backend
-set_backend('torch') # numpy, tf (numpy is default)
-X, y, X_test = load_olympic()
+import regdata as rd
+rd.set_backend('torch') # numpy, tf (numpy is default)
+X, y, X_test = rd.Step().get_data()
 ```
 
 ## Plot datasets to have a quick glance
 
 ```python
-from regdata import load_olympic
-load_olympic.plot()
+import regdata as rd
+rd.Olympic().plot()
 ```
 
 ## Datasets
 
 ```python
 from regdata import (
-    load_olympic,
-    load_step,
-    load_motor,
-    load_jump1d,
-    load_smooth1d
+    Step,
+    Olympic,
+    Smooth1D
 )
 ```
+
+## References
+
+* [Step](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
+* [Olympic](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
+* [Smooth1D](http://www.stat.cmu.edu/~kass/papers/bars.pdf) - Example 2
