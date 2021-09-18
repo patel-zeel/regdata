@@ -18,6 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt | cat
+          pip install tensorflow torch | cat
       - name: Test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
