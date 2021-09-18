@@ -107,3 +107,16 @@ class Base:
             raise NotImplementedError('scaler: '+scaler)
 
         self.y = self.yscaler.fit_transform(self.y)
+    
+    def plot(self, ax=None, **kwargs):
+        if ax is not None:
+            ax.scatter(self.X, self.y, **kwargs)
+            return ax
+        
+        try:
+            plt
+        except NameError:
+            import matplotlib.pyplot as plt
+        fig, ax = plt.subplots()
+        ax.scatter(self.X, self.y, **kwargs)
+        return ax

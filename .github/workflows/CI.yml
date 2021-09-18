@@ -19,7 +19,7 @@ jobs:
         run: |
           pip install -r requirements.txt | cat
           pip install tensorflow torch | cat
-          pip insrall pytest pytest-cov coveralls
+          pip install pytest pytest-cov coveralls
       - name: Test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
