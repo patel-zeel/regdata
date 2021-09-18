@@ -2,3 +2,6 @@ __pycache__
 .pytest_cache
 .vscode
 .tabnine.model
+build
+dist
+*.egg-info
