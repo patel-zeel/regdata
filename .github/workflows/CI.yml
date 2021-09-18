@@ -19,6 +19,7 @@ jobs:
         run: |
           pip install -r requirements.txt | cat
           pip install tensorflow torch | cat
+          pip insrall pytest pytest-cov coveralls
       - name: Test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -26,7 +27,7 @@ jobs:
           COVERALLS_PARALLEL: true
         run: |
           pytest -v --cov=regdata --cov-report term-missing
-          coveralls --service=github
+          # coveralls --service=github # Disable temporary
   coveralls:
     name: Finish coverage
     needs: test
