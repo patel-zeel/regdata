@@ -4,6 +4,10 @@ Collection of regression datasets.
 
 * Get data in any framework: ```torch```, ```tensorflow``` or ```numpy```
 
+## Install
+```bash
+pip install regdata
+```
 ## Quick example
 
 ```python
