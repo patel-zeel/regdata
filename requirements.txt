@@ -1,6 +1,7 @@
 torch
 tensorflow
 numpy
+pandas
 pytest
 pytest-cov
 coveralls
