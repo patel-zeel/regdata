@@ -11,7 +11,8 @@ class Step(Base):
         X = np.vstack((np.linspace(Min, -gap/2.0, num_low)[:, np.newaxis],
               np.linspace(gap/2.0, Max, num_high)[:, np.newaxis]))
         y = np.vstack((np.zeros((num_low, 1)), np.ones((num_high,1))))
-        
-        super().__init__(X, y, return_test, scale_X, scale_y, 
+        Xnames = ['X']
+        ynames = ['y']
+        super().__init__(X, y, Xnames, ynames, return_test, scale_X, scale_y, 
                 mean_normalize_y, noisy, test_train_ratio, s_to_n_ratio,
-                noise_variance, scaler, backend=backend)
+                noise_variance, scaler, backend=backend, random_state=random_state)

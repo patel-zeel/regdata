@@ -10,7 +10,8 @@ class Smooth1D(Base):
         np.random.seed(random_state)
         X = np.linspace(min, max, samples).reshape(-1,1)
         y = np.sin(X) + 2 * np.exp(-30 * np.square(X))
-        
-        super().__init__(X, y, return_test, scale_X, scale_y, 
+        Xnames = ['X']
+        ynames = ['y']
+        super().__init__(X, y, Xnames, ynames, return_test, scale_X, scale_y, 
                 mean_normalize_y, noisy, test_train_ratio, s_to_n_ratio,
-                noise_variance, scaler, backend=backend)
+                noise_variance, scaler, backend=backend, random_state=random_state)
