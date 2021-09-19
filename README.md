@@ -23,6 +23,8 @@ import regdata as rd
 rd.Olympic().plot()
 ```
 
+Checkout all plots [here](https://nbviewer.jupyter.org/github/patel-zeel/regdata/blob/main/notebooks/visualize.ipynb).
+
 ## Datasets
 
 ```python
