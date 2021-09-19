@@ -7,6 +7,7 @@ class Step(Base):
                 noise_variance=None, scaler='std', Min=-1, Max=1, num_low=25, num_high=25, 
                 gap=-0.1, random_state=0, backend=None):
         
+        synthetic = True
         np.random.seed(random_state)
         X = np.vstack((np.linspace(Min, -gap/2.0, num_low)[:, np.newaxis],
               np.linspace(gap/2.0, Max, num_high)[:, np.newaxis]))
@@ -15,4 +16,5 @@ class Step(Base):
         ynames = ['y']
         super().__init__(X, y, Xnames, ynames, return_test, scale_X, scale_y, 
                 mean_normalize_y, noisy, test_train_ratio, s_to_n_ratio,
-                noise_variance, scaler, backend=backend, random_state=random_state)
+                noise_variance, scaler, backend=backend, random_state=random_state, 
+                synthetic=synthetic)

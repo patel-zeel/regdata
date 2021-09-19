@@ -5,8 +5,9 @@ from sklearn.preprocessing import StandardScaler, MinMaxScaler
 class Base:
     def __init__(self, X, y, Xnames, ynames, return_test, scale_X, scale_y, 
                 mean_normalize_y, noisy, test_train_ratio, s_to_n_ratio,
-                noise_variance, scaler, random_state, backend=None):
+                noise_variance, scaler, random_state, backend, synthetic=False):
 
+        self.synthetic = synthetic
         if backend is not None:        
             self.set_backend(backend)
 
@@ -124,7 +125,8 @@ class Base:
         self.y_noisy_scaled = self.yscaler.transform(self.y_noisy)
     
     def _plot(self, ax, **kwargs):
-        ax.plot(self.X, self.y, label='True f')
+        if self.synthetic:
+            ax.plot(self.X, self.y, label='True f')
         ax.scatter(self.X, self.y_noisy, label='data', **kwargs)
         ax.set_xlabel(self.Xnames[0])
         ax.set_ylabel(self.ynames[0])
