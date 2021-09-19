@@ -20,15 +20,16 @@ class Base:
         assert y.shape[1] == 1, "y should have shape (*,1) but has "+str(y.shape)
         assert X.shape[0] == y.shape[0], "X and y must be of the same length"
         self.X = X
+        self.y = y
         self.N = X.shape[0]
         if noisy:
             if s_to_n_ratio!=None and noise_variance!=None:
                 raise ValueError("set either s_to_n_ratio OR noise_variance")    
             if s_to_n_ratio != None:
                 var_y = np.var(y)
-            self.y = y + np.random.normal(0, var_y/s_to_n_ratio, (self.N, 1))
+            self.y_noisy = y + np.random.normal(0, var_y/s_to_n_ratio, (self.N, 1))
         else:
-            self.y = y
+            self.y_noisy = y
 
         if return_test:
             Min = X.min()
@@ -53,24 +54,28 @@ class Base:
             raise ValueError("set either scale_y=True OR mean_normalize_y=True")
 
     def get_data(self):
-        return self.transform(self.X, self.y, self.X_test)
+        return self.transform(self.X, self.y_noisy, self.X_test)
 
     def transform(self, X, y, X_test):
         backend = self.get_backend()
         if backend == 'numpy':
             if self.return_test:
-                return self.X, self.y, self.X_test
-            return self.X, self.y
+                return X, y, X_test
+            return X, y
         elif backend == 'tf':
             import tensorflow as tf
             if self.return_test:
-                return tf.convert_to_tensor(self.X), tf.convert_to_tensor(self.y), tf.convert_to_tensor(self.X_test)
-            return tf.convert_to_tensor(self.X), tf.convert_to_tensor(self.y)
+                return tf.convert_to_tensor(X), \
+                tf.convert_to_tensor(y), \
+                tf.convert_to_tensor(X_test)
+            return tf.convert_to_tensor(X), tf.convert_to_tensor(y)
         elif backend == 'torch':
             import torch
             if self.return_test:
-                return torch.tensor(self.X), torch.tensor(self.y), torch.tensor(self.X_test)
-            return torch.tensor(self.X), torch.tensor(self.y)
+                return torch.tensor(X), \
+                    torch.tensor(y), \
+                    torch.tensor(X_test)
+            return torch.tensor(X), torch.tensor(y)
         else:
             raise NotImplementedError("This error should be handled when called set_backend")
     
@@ -107,16 +112,23 @@ class Base:
             raise NotImplementedError('scaler: '+scaler)
 
         self.y = self.yscaler.fit_transform(self.y)
+        self.y_noisy = self.yscaler.transform(self.y_noisy)
     
+    def _plot(self, ax, **kwargs):
+        ax.plot(self.X, self.y, label='True f')
+        ax.scatter(self.X, self.y_noisy, label='data', **kwargs)
+        ax.set_xlabel('X')
+        ax.set_ylabel('y')
+        ax.legend()
+        return ax
+
     def plot(self, ax=None, **kwargs):
         if ax is not None:
-            ax.scatter(self.X, self.y, **kwargs)
-            return ax
+            return self._plot(ax, **kwargs)
         
         try:
             plt
         except NameError:
             import matplotlib.pyplot as plt
         fig, ax = plt.subplots()
-        ax.scatter(self.X, self.y, **kwargs)
-        return ax
+        return self._plot(ax, **kwargs)
