@@ -1,5 +1,7 @@
 # RegData
 
+[![CI](https://github.com/patel-zeel/regdata/workflows/CI/badge.svg)](https://github.com/patel-zeel/regdata/actions?query=workflow%3ACI)
+
 Collection of regression datasets.
 
 * Get data in any framework: ```torch```, ```tensorflow``` or ```numpy```
