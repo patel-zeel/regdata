@@ -12,4 +12,4 @@ def plotting_test(func, **kwargs):
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
     func(backend='numpy', **kwargs).plot(ax=ax)
-    fig.savefig(repr(func.__name__)+'.jpg')
+    fig.savefig('figures/'+func.__name__+'pdf')
