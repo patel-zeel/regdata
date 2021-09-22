@@ -1,6 +1,7 @@
 # RegData
 
 [![CI](https://github.com/patel-zeel/regdata/workflows/CI/badge.svg)](https://github.com/patel-zeel/regdata/actions?query=workflow%3ACI)
+[![Coverage Status](https://coveralls.io/repos/github/patel-zeel/regdata/badge.svg?branch=main)](https://coveralls.io/github/patel-zeel/regdata?branch=main)
 
 Collection of regression datasets.
 
