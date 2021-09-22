@@ -27,16 +27,16 @@ jobs:
           COVERALLS_PARALLEL: true
         run: |
           pytest -v --cov=regdata --cov-report term-missing
-          # coveralls --service=github # Disable temporary
-  # coveralls:
-  #   name: Finish coverage
-  #   needs: test
-  #   runs-on: ubuntu-latest
-  #   container: python:3-slim
-  #   steps:
-  #   - name: Finished
-  #     run: |
-  #       pip3 install --upgrade coveralls
-  #       coveralls --finish
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          coveralls --service=github
+  coveralls:
+    name: Finish coverage
+    needs: test
+    runs-on: ubuntu-latest
+    container: python:3-slim
+    steps:
+    - name: Finished
+      run: |
+        pip3 install --upgrade coveralls
+        coveralls --finish
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
