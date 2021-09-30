@@ -63,29 +63,29 @@ class Base:
         else:
             raise ValueError("set either scale_y=True OR mean_normalize_y=True")
 
-    def get_data(self):
-        return self.transform(self.X_scaled, self.y_noisy_scaled, self.X_test_scaled)
+    def get_data(self, squeeze_y=True):
+        return self.transform(self.X_scaled, self.y_noisy_scaled, self.X_test_scaled, squeeze_y)
 
-    def transform(self, X, y, X_test):
+    def transform(self, X, y, X_test, squeeze_y):
         backend = self.get_backend()
         if backend == 'numpy':
             if self.return_test:
                 return X, y, X_test
-            return X, y
+            return X, y.squeeze() if squeeze_y else y
         elif backend == 'tf':
             import tensorflow as tf
             if self.return_test:
                 return tf.convert_to_tensor(X), \
                 tf.convert_to_tensor(y), \
                 tf.convert_to_tensor(X_test)
-            return tf.convert_to_tensor(X), tf.convert_to_tensor(y)
+            return tf.convert_to_tensor(X), tf.convert_to_tensor(y).squeeze() if squeeze_y else tf.convert_to_tensor(y)
         elif backend == 'torch':
             import torch
             if self.return_test:
                 return torch.tensor(X), \
                     torch.tensor(y), \
                     torch.tensor(X_test)
-            return torch.tensor(X), torch.tensor(y)
+            return torch.tensor(X), torch.tensor(y).squeeze() if squeeze_y else torch.tensor(y)
         else:
             raise NotImplementedError("This error should be handled when called set_backend")
     
