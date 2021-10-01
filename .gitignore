@@ -6,5 +6,3 @@ build
 dist
 *.egg-info
 .ipynb_checkpoints
-*.pyc
-regdata/_version.py

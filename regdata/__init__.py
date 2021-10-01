@@ -1,5 +1,3 @@
-from ._version import version as __version__ 
-
 import os
 os.environ['BACKEND'] = 'numpy'
 os.environ['DATAPATH'] = '/tmp/somerandomtexthere_'
