@@ -1,5 +1,4 @@
-with open('VERSION') as f:
-    __version__ = f.read()
+from ._version import version as __version__ 
 
 import os
 os.environ['BACKEND'] = 'numpy'
