@@ -77,7 +77,7 @@ class Base:
         elif backend == 'tf':
             import tensorflow as tf
             returnable.append(tf.convert_to_tensor(X))
-            returnable.append(tf.convert_to_tensor(y).squeeze() if squeeze_y else tf.convert_to_tensor(y))
+            returnable.append(tf.squeeze(tf.convert_to_tensor(y)) if squeeze_y else tf.convert_to_tensor(y))
             if self.return_test:
                 returnable.append(tf.convert_to_tensor(X_test))
         elif backend == 'torch':
