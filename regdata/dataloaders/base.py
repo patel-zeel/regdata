@@ -68,27 +68,29 @@ class Base:
 
     def transform(self, X, y, X_test, squeeze_y):
         backend = self.get_backend()
+        returnable = []
         if backend == 'numpy':
+            returnable.append(X)
+            returnable.append(y.squeeze() if squeeze_y else y)
             if self.return_test:
-                return X, y, X_test
-            return X, y.squeeze() if squeeze_y else y
+                returnable.append(X_test)
         elif backend == 'tf':
             import tensorflow as tf
+            returnable.append(tf.convert_to_tensor(X))
+            returnable.append(tf.convert_to_tensor(y).squeeze() if squeeze_y else tf.convert_to_tensor(y))
             if self.return_test:
-                return tf.convert_to_tensor(X), \
-                tf.convert_to_tensor(y), \
-                tf.convert_to_tensor(X_test)
-            return tf.convert_to_tensor(X), tf.convert_to_tensor(y).squeeze() if squeeze_y else tf.convert_to_tensor(y)
+                returnable.append(tf.convert_to_tensor(X_test))
         elif backend == 'torch':
             import torch
+            returnable.append(torch.tensor(X))
+            returnable.append(torch.tensor(y).squeeze() if squeeze_y else torch.tensor(y))
             if self.return_test:
-                return torch.tensor(X), \
-                    torch.tensor(y), \
-                    torch.tensor(X_test)
-            return torch.tensor(X), torch.tensor(y).squeeze() if squeeze_y else torch.tensor(y)
+                returnable.append(torch.tensor(X_test))
         else:
             raise NotImplementedError("This error should be handled when called set_backend")
-    
+
+        return returnable
+
     def set_backend(self, backend):
         os.environ['BACKEND'] = backend
 
