@@ -1,14 +1,14 @@
 from .common import backend_test, plotting_test
-import regdata as rd
+from regdata import Step, Smooth1D, Olympic
 
 def test_step():
-    backend_test(rd.Step)
-    plotting_test(rd.Step)
+    backend_test(Step)
+    plotting_test(Step)
 
 def test_smooth1d():
-    backend_test(rd.Smooth1D)
-    plotting_test(rd.Smooth1D)
+    backend_test(Smooth1D)
+    plotting_test(Smooth1D)
 
 def test_olympic():
-    backend_test(rd.Olympic)
-    plotting_test(rd.Olympic)
+    backend_test(Olympic)
+    plotting_test(Olympic)
