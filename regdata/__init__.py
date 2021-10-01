@@ -1,3 +1,6 @@
+with open('VERSION') as f:
+    __version__ = f.read()
+
 import os
 os.environ['BACKEND'] = 'numpy'
 os.environ['DATAPATH'] = '/tmp/somerandomtexthere_'
