@@ -1,5 +1,7 @@
 import os
+import warnings
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 class Base:
@@ -145,3 +147,17 @@ class Base:
             import matplotlib.pyplot as plt
         fig, ax = plt.subplots()
         return self._plot(ax, **kwargs)
+
+    def check_download_and_get(self, name):
+        if not os.path.exists(os.environ['DATAPATH']+name):
+            warnings.warn('data not found. Downloading...')
+            path = 'https://raw.githubusercontent.com/patel-zeel/regdata/main/archive/'+name
+            os.system('wget '+path+' -O '+os.environ['DATAPATH']+name)
+        data = pd.read_csv(os.environ['DATAPATH']+name)
+        cols = data.columns        
+        X = data[cols[0]].values.reshape(-1,1)
+        y = data[cols[1]].values.reshape(-1,1)
+
+        Xnames = cols[0]
+        ynames = cols[1]
+        return X, y, Xnames, ynames

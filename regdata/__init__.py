@@ -9,3 +9,4 @@ from .config import set_backend
 from .dataloaders.step import Step
 from .dataloaders.smooth1d import Smooth1D
 from .dataloaders.olympic import Olympic
+from .dataloaders.mcycle import MotorcycleHelmet

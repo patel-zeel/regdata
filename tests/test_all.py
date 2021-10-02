@@ -12,3 +12,7 @@ def test_smooth1d():
 def test_olympic():
     backend_test(rd.Olympic)
     plotting_test(rd.Olympic)
+
+def test_mcycle():
+    backend_test(rd.MotorcycleHelmet)
+    plotting_test(rd.MotorcycleHelmet)
