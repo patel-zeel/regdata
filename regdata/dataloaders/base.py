@@ -152,8 +152,10 @@ class Base:
         if not os.path.exists(os.environ['DATAPATH']+name):
             warnings.warn('data not found. Downloading...')
             path = 'https://raw.githubusercontent.com/patel-zeel/regdata/main/archive/'+name
-            os.system('wget '+path+' -O '+os.environ['DATAPATH']+name)
-        data = pd.read_csv(os.environ['DATAPATH']+name)
+            data = pd.read_csv(path)
+            data.to_csv(os.environ['DATAPATH']+name, index=None)
+        else:
+            data = pd.read_csv(os.environ['DATAPATH']+name)
         cols = data.columns        
         X = data[cols[0]].values.reshape(-1,1)
         y = data[cols[1]].values.reshape(-1,1)

@@ -16,3 +16,8 @@ def test_olympic():
 def test_mcycle():
     backend_test(rd.MotorcycleHelmet)
     plotting_test(rd.MotorcycleHelmet)
+
+
+def test_gene():
+    backend_test(rd.DellaGattaGene)
+    plotting_test(rd.DellaGattaGene)
