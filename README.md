@@ -3,9 +3,7 @@
 [![CI](https://github.com/patel-zeel/regdata/workflows/CI/badge.svg)](https://github.com/patel-zeel/regdata/actions?query=workflow%3ACI)
 [![Coverage Status](https://coveralls.io/repos/github/patel-zeel/regdata/badge.svg?branch=main)](https://coveralls.io/github/patel-zeel/regdata?branch=main)
 
-Collection of regression datasets.
-
-* Get data in any framework: ```torch```, ```tensorflow``` or ```numpy```
+A collection of regression datasets.
 
 ## Install
 ```bash
@@ -16,8 +14,16 @@ pip install regdata
 ```python
 import regdata as rd
 rd.set_backend('torch') # numpy, tf (numpy is default)
-X, y, X_test = rd.Step().get_data()
+X, y, X_test = rd.Step().get_data() # Loads step function dataset
 ```
+
+## Features
+
+* Simple API for quick benchmarking on various datasets.
+* Get data in any framework: ```torch```, ```tensorflow``` or ```numpy``` by setting a global backend.
+* Scale ```X``` and/or ```y``` data with ```MinMaxScaler``` or ```StandardScaler```.
+* Get ```y``` in squeezed ```(n,)``` or unsqueezed ```(n,1)``` format.
+* Perform only mean normalization on ```y```.
 
 ## Plot datasets to have a quick glance
 
@@ -32,14 +38,20 @@ Checkout all plots [here](https://nbviewer.jupyter.org/github/patel-zeel/regdata
 
 ```python
 from regdata import (
-    Step,
+    DellaGattaGene,
+    MotorcycleHelmet,
     Olympic,
-    Smooth1D
+    SineJump1D,
+    Smooth1D,
+    Step
 )
 ```
 
 ## References
 
-* [Step](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
+* [DellaGattaGene](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
+* [MotorcycleHelmet](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
 * [Olympic](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
+* [SineJump1D](https://github.com/jmetzen/gp_extras/blob/master/examples/plot_gpr_lls.py)
 * [Smooth1D](http://www.stat.cmu.edu/~kass/papers/bars.pdf) - Example 2
+* [Step](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
