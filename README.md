@@ -24,6 +24,8 @@ X, y, X_test = rd.Step().get_data() # Loads step function dataset
 * Scale ```X``` and/or ```y``` data with ```MinMaxScaler``` or ```StandardScaler```.
 * Get ```y``` in squeezed ```(n,)``` or unsqueezed ```(n,1)``` format.
 * Perform only mean normalization on ```y```.
+* Add custom noise to the observations (```y```).
+* Get consistent data with fixed random seed.
 
 ## Plot datasets to have a quick glance
 

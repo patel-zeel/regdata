@@ -1,8 +1,8 @@
 from .base import Base
 
 class MotorcycleHelmet(Base):
-    def __init__(self, return_test=True, scale_X = True, scale_y = False, 
-                mean_normalize_y=True, test_train_ratio=2, s_to_n_ratio=None,
+    def __init__(self, return_test=True, scale_X = True, scale_y = True, 
+                mean_normalize_y=False, test_train_ratio=2, s_to_n_ratio=None,
                 noise_variance=None, scaler='std', random_state=0, backend=None):
 
         synthetic=False

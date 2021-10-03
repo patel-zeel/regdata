@@ -2,20 +2,11 @@ import os
 
 def set_backend(backend):
     if backend == 'numpy':
-        try:
-            import numpy
-        except:
-            raise ImportError("Numpy is not installed")
+        import numpy        
     elif backend == 'torch':
-        try:
-            import torch
-        except:
-            raise ImportError("Torch is not installed")
+        import torch
     elif backend == 'tf':
-        try:
-            import tensorflow
-        except:
-            raise ImportError("Tensorflow is not installed")
+        import tensorflow
     else:
         raise NotImplementedError('backend "'+ backend +'" is not implemented')
 
