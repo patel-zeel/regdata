@@ -20,6 +20,7 @@ jobs:
           pip install --no-cache-dir -U -r requirements.txt | cat
           pip install tensorflow torch | cat
           pip install pytest pytest-cov coveralls
+          pip install --upgrade numpy
       - name: Test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
