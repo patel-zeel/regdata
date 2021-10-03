@@ -1,28 +1,28 @@
 from .lib import *
 
 
-def backend_test(func, **kwargs):
-    X, y, X_test = func(backend='numpy', **kwargs).get_data()
+def backend_test(func):
+    X, y, X_test = func(backend='numpy').get_data()
     assert X.dtype == y.dtype == X_test.dtype == np.float64
-    X, y, X_test = func(backend='torch', **kwargs).get_data()
+    X, y, X_test = func(backend='torch').get_data()
     assert X.dtype == y.dtype == X_test.dtype == torch.float64
-    X, y, X_test = func(backend='tf', **kwargs).get_data()
+    X, y, X_test = func(backend='tf').get_data()
     assert X.dtype == y.dtype == X_test.dtype == tf.float64
 
 
-def plotting_test_with_plt(func, **kwargs):
+def plotting_test_with_plt(func):
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
-    func(backend='numpy', **kwargs).plot(fig=fig, ax=ax)
+    func(backend='numpy', scale_X=False, scale_y=False).plot(fig=fig, ax=ax)
     fig.savefig('figures/'+func.__name__+'.pdf')
 
 
-def plotting_test_without_plt(func, **kwargs):
-    fig, ax = func(backend='numpy', **kwargs).plot()
+def plotting_test_without_plt(func):
+    fig, ax = func(backend='numpy', scale_X=False, scale_y=False).plot()
     fig.savefig('figures/'+func.__name__+'.pdf')
 
 
-def non_syntetic_test(func, **kwargs):
+def non_syntetic_test(func):
     """
     Non-synthetic data should not have noise by default.
     """

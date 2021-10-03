@@ -32,6 +32,12 @@ def test_sinejump():
     plotting_test_without_plt(rd.SineJump1D)
 
 
+def test_sinenoisy():
+    backend_test(rd.SineNoisy)
+    plotting_test_with_plt(rd.SineNoisy)
+    plotting_test_without_plt(rd.SineNoisy)
+
+
 def test_smooth1d():
     backend_test(rd.Smooth1D)
     plotting_test_with_plt(rd.Smooth1D)

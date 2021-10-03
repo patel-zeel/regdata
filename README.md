@@ -44,6 +44,7 @@ from regdata import (
     MotorcycleHelmet,
     Olympic,
     SineJump1D,
+    SineNoisy,
     Smooth1D,
     Step
 )
@@ -55,5 +56,6 @@ from regdata import (
 * [MotorcycleHelmet](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
 * [Olympic](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
 * [SineJump1D](https://github.com/jmetzen/gp_extras/blob/master/examples/plot_gpr_lls.py)
+* [SineNoisy](https://docs.gpytorch.ai/en/v1.5.0/examples/01_Exact_GPs/Simple_GP_Regression.html)
 * [Smooth1D](http://www.stat.cmu.edu/~kass/papers/bars.pdf) - Example 2
 * [Step](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
