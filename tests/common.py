@@ -23,4 +23,4 @@ def non_syntetic_test(func, **kwargs):
     X, y = obj.get_data(squeeze_y=False)
     end_data = np.concatenate([X, y], axis=1)
     start_data = pd.read_csv('archive/'+obj.file_name).values
-    assert np.all(end_data==start_data)
+    assert np.allclose(end_data, start_data)
