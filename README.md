@@ -41,6 +41,8 @@ Checkout all plots [here](https://nbviewer.jupyter.org/github/patel-zeel/regdata
 ```python
 from regdata import (
     DellaGattaGene,
+    Heinonen4,
+    Jump1D,
     MotorcycleHelmet,
     Olympic,
     SineJump1D,
@@ -53,6 +55,8 @@ from regdata import (
 ## References
 
 * [DellaGattaGene](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
+* [Heinonen4](https://github.com/markusheinonen/adaptivegp)
+* [Jump1D](https://github.com/markusheinonen/adaptivegp)
 * [MotorcycleHelmet](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
 * [Olympic](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
 * [SineJump1D](https://github.com/jmetzen/gp_extras/blob/master/examples/plot_gpr_lls.py)

@@ -12,6 +12,20 @@ def test_della_gatta_gene():
     non_syntetic_test(rd.DellaGattaGene)
 
 
+def test_heinonen_4():
+    backend_test(rd.Heinonen4)
+    plotting_test_with_plt(rd.Heinonen4)
+    plotting_test_without_plt(rd.Heinonen4)
+    non_syntetic_test(rd.Heinonen4)
+
+
+def test_jump1d():
+    backend_test(rd.Jump1D)
+    plotting_test_with_plt(rd.Jump1D)
+    plotting_test_without_plt(rd.Jump1D)
+    non_syntetic_test(rd.Jump1D)
+
+
 def test_mcycle():
     backend_test(rd.MotorcycleHelmet)
     plotting_test_with_plt(rd.MotorcycleHelmet)
