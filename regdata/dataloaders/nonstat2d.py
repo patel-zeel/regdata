@@ -2,21 +2,24 @@ import numpy as np
 from .base import Base
 
 
-class Step(Base):
+class NonStat2D(Base):
     def __init__(self, return_test=True, scale_X=True, scale_y=True,
-                 mean_normalize_y=False, test_train_ratio=2, s_to_n_ratio=None,
-                 noise_variance=10**-4, scaler='std', Min=-1, Max=1, num_low=25, num_high=25,
-                 gap=-0.1, random_state=0, backend=None):
+                 mean_normalize_y=False, test_train_ratio=2,
+                 s_to_n_ratio=None, noise_variance=0.025**2, scaler='std',
+                 min=-0.5, max=1, samples=121, random_state=0, backend=None):
 
         synthetic = True
         file_name = None
-        
-        X = np.vstack((np.linspace(Min, -gap/2.0, num_low)[:, np.newaxis],
-                       np.linspace(gap/2.0, Max, num_high)[:, np.newaxis]))
-        y = np.vstack((np.zeros((num_low, 1)), np.ones((num_high, 1))))
-        f = lambda x: y
+        def f(x1, x2): 
+            b = np.pi * (2*x1 + 0.5*x2 + 1)
+            return 0.1 * (np.sin(b*x1) + np.sin(b*x2))
+        x1 = np.linspace(min, max, int(samples**0.5)).reshape(-1, 1)
+        x2 = np.linspace(min, max, int(samples**0.5)).reshape(-1, 1)
+        X1, X2 = np.meshgrid(x1, x2)
+        X = np.array([(i,j) for i,j in zip(X1.ravel(), X2.ravel())])
+        y = np.array([f(i,j) for i,j in zip(X1.ravel(), X2.ravel())]).reshape(-1,1)
 
-        X_names = ['X']
+        X_names = ['X1', 'X2']
         y_names = ['y']
         super().__init__(X=X,
                          y=y,

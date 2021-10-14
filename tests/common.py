@@ -14,12 +14,12 @@ def plotting_test_with_plt(func):
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
     func(backend='numpy', scale_X=False, scale_y=False).plot(fig=fig, ax=ax)
-    fig.savefig('figures/'+func.__name__+'.pdf')
+    fig.savefig('figures/'+func.__name__+'.jpg')
 
 
 def plotting_test_without_plt(func):
     fig, ax = func(backend='numpy', scale_X=False, scale_y=False).plot()
-    fig.savefig('figures/'+func.__name__+'.pdf')
+    fig.savefig('figures/'+func.__name__+'.jpg')
 
 
 def non_syntetic_test(func):

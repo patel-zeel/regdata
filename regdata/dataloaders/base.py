@@ -39,11 +39,24 @@ class Base:
         self._scale_y()
 
     def set_X_test(self):
-        Min = self.X.min()
-        Max = self.X.max()
-        Range = Max-Min
-        n = self.N*self.test_train_ratio
-        self.X_test = np.linspace(Min-Range/10, Max+Range/10, n).reshape(-1, 1)
+        if self.X.shape[1] == 1:
+            Min = self.X.min()
+            Max = self.X.max()
+            Range = Max-Min
+            n = self.N*self.test_train_ratio
+            self.X_test = np.linspace(Min-Range/10, Max+Range/10, n).reshape(-1, 1)
+        elif self.X.shape[1] == 2:
+            Min = self.X.min(axis=0)
+            Max = self.X.max(axis=0)
+            Range = Max-Min
+            n = int(self.N**0.5)*self.test_train_ratio
+            x1 = np.linspace(Min[0]-Range[0]/10, Max[0] + Range[0]/10, n).reshape(-1, 1)
+            x2 = np.linspace(Min[1]-Range[1]/10, Max[1] + Range[1]/10, n).reshape(-1, 1)
+            X1, X2 = np.meshgrid(x1, x2)
+            self.X_test = np.array([(i,j) for i,j in zip(X1.ravel(), X2.ravel())])
+        # For future
+        # else:
+        #     raise ValueError("X_test generation is unsupported for more than two dimensions")
 
     def add_noise(self):
         self.y_original = self.y.copy()
@@ -131,25 +144,58 @@ class Base:
         self.y = self.y_scaler.fit_transform(self.y)
         self.y_original = self.y_scaler.fit_transform(self.y_original)
 
-    def _plot(self, fig, ax, **kwargs):
+    def _plot1D(self, fig, ax, dims, **kwargs):
         if self.synthetic:
             ax.plot(self.X, self.f(self.X), label='True f')
         ax.scatter(self.X, self.y, label='data', **kwargs)
-        ax.set_xlabel(self.X_names[0])
+        ax.set_xlabel(self.X_names[dims[0]])
         ax.set_ylabel(self.y_names[0])
         ax.legend()
         return fig, ax
 
-    def plot(self, fig=None, ax=None, **kwargs):
+    def _plot2D(self, fig, ax, dims, **kwargs):
+        if self.synthetic:
+            n = self.X.shape[0]
+            X1, X2 = np.meshgrid(self.X[:,dims[0]], self.X[:,dims[1]])
+            Z = np.array([self.f(i,j) for i,j in zip(X1.ravel(), X2.ravel())]).reshape(n,n)
+            ax.contourf(X1, X2, Z, levels=30, **kwargs)
+            ax.set_xlabel(self.X_names[dims[0]])
+            ax.set_ylabel(self.X_names[dims[1]])
+            return fig, ax
+        # For future
+        # else:
+        #     raise ValueError('2D plotting is currently unsupported for non-synthetic datasets')
+
+    def _plot(self, fig, ax, dims, **kwargs):
+        max_dim = self.X.shape[1]
+        if dims is None:
+            if max_dim == 2:
+                return self._plot2D(fig, ax, [0,1], **kwargs)
+            elif max_dim == 1:
+                return self._plot1D(fig, ax, [0], **kwargs)
+            # For future
+            # elif max_dim > 2:
+            #     raise ValueError("Please specify dims for if data has dimensions more than 2")
+        else:
+            if len(dims) > 2:
+                raise ValueError("More than 2 dimensions are not supported")
+            elif len(dims) == 2:
+                return self._plot2D(fig, ax, dims, **kwargs)
+            elif len(dims) == 1:
+                return self._plot1D(fig, ax, dims, **kwargs)
+            else:
+                raise ValueError("This error should only occur if dims is an empty list")
+
+    def plot(self, fig=None, ax=None, dims=None, **kwargs):
         if fig is not None and ax is not None:
-            return self._plot(fig, ax, **kwargs)
+            return self._plot(fig, ax, dims, **kwargs)
 
         try:
             plt
         except NameError:
             import matplotlib.pyplot as plt
         fig, ax = plt.subplots()
-        return self._plot(fig, ax, **kwargs)
+        return self._plot(fig, ax, dims, **kwargs)
 
     def check_download_and_get(self, name):
         if not os.path.exists(os.environ['DATAPATH']+name):
