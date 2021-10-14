@@ -44,6 +44,7 @@ from regdata import (
     Heinonen4,
     Jump1D,
     MotorcycleHelmet,
+    NonStat2D,
     Olympic,
     SineJump1D,
     SineNoisy,
@@ -58,6 +59,7 @@ from regdata import (
 * [Heinonen4](https://github.com/markusheinonen/adaptivegp)
 * [Jump1D](https://github.com/markusheinonen/adaptivegp)
 * [MotorcycleHelmet](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
+* [NonStat2D](http://ais.informatik.uni-freiburg.de/publications/papers/plagemann08ecml.pdf)
 * [Olympic](http://inverseprobability.com/talks/notes/deep-gaussian-processes.html)
 * [SineJump1D](https://github.com/jmetzen/gp_extras/blob/master/examples/plot_gpr_lls.py)
 * [SineNoisy](https://docs.gpytorch.ai/en/v1.5.0/examples/01_Exact_GPs/Simple_GP_Regression.html)
